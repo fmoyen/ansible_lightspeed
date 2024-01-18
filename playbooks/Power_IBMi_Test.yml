@@ -1,0 +1,28 @@
+---
+- name: IBM Power IBMi test
+  hosts: all
+  gather_facts: false
+  become: true
+
+  collections:
+    - ibm.power_ibmi
+
+  tasks:
+    - name: Run a SQL query
+      register: sql_result
+      ibm.power_ibmi.ibmi_sql_query:
+        sql: SELECT * FROM TABLE(QSYS2.ACTIVE_JOB_INFO( JOB_NAME_FILTER => 'QZHQSRVD', SUBSYSTEM_LIST_FILTER
+          => 'QSYSWRK')) X
+
+    - name: Execute a SQL statement
+      ansible.builtin.debug:
+        msg: SELECT * FROM TABLE(QSYS2.ACTIVE_JOB_INFO( JOB_NAME_FILTER => 'QZHQSRVD', SUBSYSTEM_LIST_FILTER
+          => 'QSYSWRK')) X | length > 0
+
+    - name: Create an IASP
+      ibm.power_ibmi.ibmi_iasp:
+        name: "{{ _name_ }}"
+        disks: "{{ _disks_ }}"
+        operation: "{{ _operation_ }}"
+      register: iasp_result
+    

@@ -1,0 +1,14 @@
+---
+- name: Configure Postgresql database servers
+  hosts: databases
+  become: true
+
+  tasks:
+    - name: Install postgresql-server
+    
+    # Run postgresql-seup command & start the service & allow the traffic through firewall
+    - name: Run postgresql-setup command
+    
+    - name: start the service
+
+    - name: Allow the traffic through firewall

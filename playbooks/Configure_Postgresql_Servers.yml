@@ -1,0 +1,32 @@
+---
+- name: Configure Postgresql database servers
+  hosts: databases
+  become: true
+
+  tasks:
+    - name: Install postgresql-server
+      ansible.builtin.package:
+        name: postgresql-server
+        state: present
+    
+    # Run postgresql-seup command & start the service & allow the traffic through firewall
+    - name: Run postgresql-setup command
+      ansible.builtin.command: /usr/bin/postgresql-setup --initdb
+      args:
+        creates: /var/lib/pgsql/data/postgresql.conf
+    
+    - name: start the service
+      ansible.builtin.service:
+        name: postgresql
+        state: started
+
+    - name: Allow the traffic through firewall
+      ansible.posix.firewalld:
+        service: postgresql
+        permanent: true
+        state: enabled
+        immediate: true
+    
+
+
+

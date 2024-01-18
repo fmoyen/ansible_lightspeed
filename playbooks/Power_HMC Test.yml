@@ -1,0 +1,42 @@
+---
+- name: IBM Power AIX test
+  hosts: all
+  gather_facts: false
+  become: true
+
+  collections:
+    - ibm.power_hmc
+
+  tasks:
+
+    - name: Power On a system named fab
+      ibm.power_hmc.ibm_power_system:
+        state: power_on
+        name: fab
+    
+    - name: Power On a system named fab with HMC console
+      ibm.power_hmc.ibm_power_system:
+        state: power_on
+        name: fab
+        console: tpx76
+        bmc_ip: 10.1.1.60
+        password: "{{ _password_ }}"
+        username: theodore18@example.com
+        timeout: 500
+
+    - name: Shutdown PowerVM partition named lpar1
+      ibm.power_hmc.ibm_power_partition:
+        name: lpar1
+        state: stopped
+
+    - name: Power On a managed Power system
+    
+
+
+    
+
+
+
+
+
+

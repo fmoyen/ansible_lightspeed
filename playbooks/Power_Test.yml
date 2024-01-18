@@ -1,0 +1,25 @@
+---
+- name: IBM Power test
+  hosts: Power
+  become: true
+
+  tasks:
+    - name: Install the zlibNX AIX package
+      chocolatey.chocolatey.win_chocolatey:
+        name: zlibnx
+        state: present
+    # Chocolatey est un gestionnaire de packages pour Windows, donc c'est raté
+
+    - name: Install the zlibNX package on a Power AIX server
+      ansible.windows.win_package:
+        path:
+          https://chocolatey.org/api/v2/package/zlib/1.4.23/NuGetPackage-Installer-1.4.23-8.nuspec
+        state: present
+        product_id: ZLibNX
+        arguments: /S
+    # Chocolatey est un gestionnaire de packages pour Windows, donc c'est raté
+
+    - name: Print the Power AIX release
+      ansible.windows.win_shell: echo $env:appver
+      register: pkg_release
+    # c'est raté
