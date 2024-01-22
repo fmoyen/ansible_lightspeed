@@ -1,0 +1,17 @@
+---
+- name: IBM Power IBMi test
+  hosts: all
+  gather_facts: false
+  become: true
+
+  collections:
+    - ibm.power_ibmi
+
+  tasks:
+    - name: Run a SQL query
+
+    - name: Execute a SQL statement
+
+    - name: Create an IASP
+
+    
