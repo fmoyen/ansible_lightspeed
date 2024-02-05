@@ -6,7 +6,7 @@
   tasks:
     - name: Install postgresql-server
     
-    # Run postgresql-seup command & start the service & allow the traffic through firewall
+    # Run postgresql-setup command & start the service & allow the traffic through firewall
     - name: Run postgresql-setup command
     
     - name: start the service
