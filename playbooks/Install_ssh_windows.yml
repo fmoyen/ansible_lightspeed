@@ -1,0 +1,32 @@
+---
+- name: Install and configure ssh
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install ssh
+      ansible.windows.win_feature:
+        name: OpenSSH
+        state: present
+
+    - name: Copy ssh configuration file
+      ansible.windows.win_copy:
+        src: ssh_config
+        dest: C:\ProgramData\ssh\config
+    
+    - name: start the ssh service
+      ansible.windows.win_service:
+        name: sshd
+        start_mode: auto
+        state: started
+    
+    - name: Ouvrir un port sur le pare-feu
+      community.windows.win_firewall_rule:
+        name: allow ssh
+        localport: "{{ _localport_ }}"
+        action: allow
+        direction: in
+        protocol: tcp
+        state: present
+        enabled: true
+    

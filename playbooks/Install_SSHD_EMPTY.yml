@@ -1,0 +1,13 @@
+---
+- name: Install and configure SSHD
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Install latest sshd
+
+    - name: Copy configuration file
+    
+    - name: start the service
+
+    - name: Allow the traffic through firewall

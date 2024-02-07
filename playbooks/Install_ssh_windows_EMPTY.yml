@@ -1,0 +1,14 @@
+---
+- name: Install and configure ssh
+  hosts: windows
+  gather_facts: false
+
+  tasks:
+    - name: Install ssh
+
+    - name: Copy ssh configuration file
+    
+    - name: start the ssh service
+    
+    - name: Ouvrir un port sur le pare-feu
+    
