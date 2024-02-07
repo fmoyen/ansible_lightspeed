@@ -1,0 +1,46 @@
+---
+- name: IBM Power AIX Demo
+  hosts: all
+  gather_facts: false
+  become: true
+
+  collections:
+    - ibm.power_aix
+
+  tasks:
+    - name: Report the LVM information
+      ibm.power_aix.power_lvm:
+        vg: test_vg
+        state: normal
+      register: print_output
+
+    - name: Configure AIX LVM volume group
+      ibm.power_aix.power_lvm:
+        vg: test_vg
+        state: present
+        size: 1G
+      register: output
+
+    - name: Configure AIX LVM volume group named datavg
+      ibm.power_aix.power_lvm:
+        vg: datavg
+        state: present
+        size: 1G
+      register: output
+
+    - name: Configure AIX LVM logical volume named fablv
+      ibm.power_aix.power_lvm:
+        vg: test_vg
+        lv: fablv
+        state: present
+        size: 2G
+      register: output
+
+    - name: Configure AIX LVM logical volume named ibmlv with a size of 500M
+      ibm.power_aix.power_lvm:
+        vg: test_vg
+        lv: ibmlv
+        size: 500m
+        state: present
+      register: output
+

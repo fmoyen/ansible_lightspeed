@@ -1,0 +1,20 @@
+---
+- name: IBM Power AIX Demo
+  hosts: all
+  gather_facts: false
+  become: true
+
+  collections:
+    - ibm.power_aix
+
+  tasks:
+    - name: Report the LVM information
+
+    - name: Configure AIX LVM volume group
+
+    - name: Configure AIX LVM volume group named datavg
+
+    - name: Configure AIX LVM logical volume named fablv
+
+    - name: Configure AIX LVM logical volume named ibmlv with a size of 500M
+
